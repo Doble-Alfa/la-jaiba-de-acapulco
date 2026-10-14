@@ -89,32 +89,80 @@
         .map-btn:hover {
             background-color: #3367d6;
         }
-        /* Galería adaptada a fotos verticales */
+        /* Galería de 12 platillos: cuatro imágenes por página */
         .gallery-subtitle {
             font-size: 0.9rem;
             color: #555;
             margin-top: -1rem;
             margin-bottom: 1.5rem;
         }
+        .gallery-container {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Columnas más estilizadas */
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 15px;
-            margin: 1.5rem 0 2.5rem;
+            width: 100%;
+            min-width: 0;
         }
         .gallery img {
             width: 100%;
-            height: auto;
-            aspect-ratio: 3 / 4; /* Proporción ideal para fotos verticales */
-            object-fit: cover; /* Se llena completo luciendo uniforme */
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .gallery img:hover {
             transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+        .carousel-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: background 0.3s, transform 0.2s;
+            flex-shrink: 0;
+        }
+        .carousel-btn:hover {
+            background-color: var(--dark-color);
+            transform: scale(1.1);
+        }
+        .carousel-dots {
+            margin: 0.8rem 0 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            background-color: #bbb;
+            border: none;
+            padding: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active { background-color: var(--primary-color); }
+        @media (max-width: 600px) {
+            .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .gallery-container { gap: 6px; }
+            .carousel-btn { width: 32px; height: 32px; font-size: 1rem; }
         }
         /* Modal / Visualizador de fotos */
         .modal {
@@ -279,15 +327,32 @@
             </a>
         </section>
 
-        <!-- Galería de Fotos interactiva -->
+        <!-- Galería de Fotos interactiva con carrusel -->
         <section>
             <h2 class="section-title">Nuestros Platillos</h2>
             <p class="gallery-subtitle">💡 Toca cualquier imagen para verla en pantalla completa</p>
-            <div class="gallery">
-                <img src="platillo1.jpeg" alt="Platillo de mariscos 1" onclick="openModal(this.src)">
-                <img src="platillo2.jpeg" alt="Platillo de mariscos 2" onclick="openModal(this.src)">
-                <img src="platillo3.jpeg" alt="Platillo de mariscos 3" onclick="openModal(this.src)">
-                <img src="platillo4.jpeg" alt="Platillo de mariscos 4" onclick="openModal(this.src)">
+            <div class="gallery-container">
+                <button class="carousel-btn" type="button" onclick="moveSlide(-1)" aria-label="Fotos anteriores">❮</button>
+                <div class="gallery" id="galleryGrid">
+                    <img src="platillo1.jpeg" class="slide-group group-0" alt="Platillo 1" onclick="openModal(this.src)" loading="lazy">
+                    <img src="platillo2.jpeg" class="slide-group group-0" alt="Platillo 2" onclick="openModal(this.src)" loading="lazy">
+                    <img src="platillo3.jpeg" class="slide-group group-0" alt="Platillo 3" onclick="openModal(this.src)" loading="lazy">
+                    <img src="platillo4.jpeg" class="slide-group group-0" alt="Platillo 4" onclick="openModal(this.src)" loading="lazy">
+                    <img src="platillo5.jpeg" class="slide-group group-1" alt="Platillo 5" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo6.jpeg" class="slide-group group-1" alt="Platillo 6" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo7.jpeg" class="slide-group group-1" alt="Platillo 7" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo8.jpeg" class="slide-group group-1" alt="Platillo 8" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo9.jpeg" class="slide-group group-2" alt="Platillo 9" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo10.jpeg" class="slide-group group-2" alt="Platillo 10" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo11.jpeg" class="slide-group group-2" alt="Platillo 11" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                    <img src="platillo12.jpeg" class="slide-group group-2" alt="Platillo 12" onclick="openModal(this.src)" loading="lazy" style="display:none;">
+                </div>
+                <button class="carousel-btn" type="button" onclick="moveSlide(1)" aria-label="Fotos siguientes">❯</button>
+            </div>
+            <div class="carousel-dots" aria-label="Páginas de la galería">
+                <button class="dot active" type="button" onclick="setGroup(0)" aria-label="Ver fotos 1 a 4" aria-current="true"></button>
+                <button class="dot" type="button" onclick="setGroup(1)" aria-label="Ver fotos 5 a 8"></button>
+                <button class="dot" type="button" onclick="setGroup(2)" aria-label="Ver fotos 9 a 12"></button>
             </div>
         </section>
 
@@ -388,16 +453,45 @@
         <p>&copy; 2026 Marisquería La Jaiba de Acapulco. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script para ampliar imágenes -->
+    <!-- Script de carrusel y ampliación de imágenes -->
     <script>
+        let currentGroup = 0;
+        const totalGroups = 3;
+
+        function setGroup(groupIndex) {
+            currentGroup = groupIndex;
+            showGroup(currentGroup);
+        }
+
+        function moveSlide(direction) {
+            currentGroup = (currentGroup + direction + totalGroups) % totalGroups;
+            showGroup(currentGroup);
+        }
+
+        function showGroup(groupIndex) {
+            document.querySelectorAll('.slide-group').forEach(img => {
+                img.style.display = img.classList.contains('group-' + groupIndex) ? 'block' : 'none';
+            });
+            document.querySelectorAll('.carousel-dots .dot').forEach((dot, idx) => {
+                const active = idx === groupIndex;
+                dot.classList.toggle('active', active);
+                if (active) dot.setAttribute('aria-current', 'true');
+                else dot.removeAttribute('aria-current');
+            });
+        }
+
         function openModal(src) {
-            document.getElementById("imgExpanded").src = src;
-            document.getElementById("imageModal").style.display = "block";
+            document.getElementById('imgExpanded').src = src;
+            document.getElementById('imageModal').style.display = 'block';
         }
 
         function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
+            document.getElementById('imageModal').style.display = 'none';
         }
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeModal();
+        });
     </script>
 
 </body>
