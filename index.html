@@ -310,6 +310,67 @@
             padding: 1rem;
             font-size: 0.9rem;
         }
+
+        /* Ilustraciones tropicales, integradas al HTML y sin archivos externos */
+        .tropical-interlude {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            margin: .25rem 0 2.7rem;
+            padding: 3.5rem 1.2rem 3.9rem;
+            border-radius: 23px;
+            background: linear-gradient(160deg, #e1f8f5 0%, #f2fbf4 51%, #fff1d5 100%);
+            box-shadow: 0 8px 24px rgba(3, 77, 92, .08);
+        }
+        .tropical-interlude::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.9), transparent 62%);
+            z-index: -1;
+        }
+        .tropical-interlude .tropical-art {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .tropical-interlude h2 {
+            color: #034b63;
+            font-size: clamp(1.45rem, 4vw, 2.15rem);
+            margin: 0 auto .6rem;
+            max-width: 540px;
+            text-shadow: 0 1px 0 rgba(255,255,255,.8);
+        }
+        .tropical-interlude p {
+            color: #28626c;
+            font-size: 1.03rem;
+            line-height: 1.5;
+            margin: 0 auto;
+            max-width: 430px;
+        }
+        .tropical-interlude .tropical-copy {position: relative; z-index: 1;}
+        .tropical-interlude .tropical-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 37px;
+            opacity: .7;
+        }
+        @media (max-width: 600px) {
+            .tropical-interlude {padding: 3.5rem 1.1rem 3.9rem;}
+            .tropical-interlude .tropical-art {opacity: .55;}
+            .tropical-interlude .tropical-copy {
+                padding: .65rem .3rem;
+                background: rgba(255,255,255,.56);
+                border-radius: 12px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -431,6 +492,56 @@
             </div>
         </section>
         
+
+        <!-- Ilustración tropical decorativa entre promociones y menú -->
+        <section class="tropical-interlude" aria-label="Ambiente tropical de La Jaiba">
+            <svg class="tropical-art" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sol tenue -->
+                <circle cx="455" cy="58" r="37" fill="#ffe4a5" opacity=".8"/>
+                <circle cx="455" cy="58" r="51" fill="none" stroke="#f9d99c" stroke-width="2" opacity=".45"/>
+                <!-- Hojas de palma del extremo izquierdo -->
+                <g transform="translate(-10 300) rotate(-14)" fill="none" stroke-linecap="round">
+                    <path d="M0 0 Q72 -165 214 -260" stroke="#287d6c" stroke-width="8"/>
+                    <g fill="#55a98a" stroke="none">
+                        <path d="M34 -87 Q-20 -186 13 -246 Q43 -183 50 -114Z"/>
+                        <path d="M53 -127 Q45 -229 104 -283 Q91 -209 70 -145Z"/>
+                        <path d="M78 -163 Q111 -256 196 -280 Q147 -224 93 -174Z"/>
+                        <path d="M93 -174 Q174 -226 257 -209 Q188 -187 112 -167Z"/>
+                        <path d="M64 -142 Q-29 -143 -71 -200 Q8 -189 78 -157Z"/>
+                        <path d="M45 -105 Q-41 -90 -93 -140 Q-13 -151 62 -128Z"/>
+                        <path d="M102 -179 Q188 -154 225 -98 Q161 -126 94 -163Z"/>
+                    </g>
+                </g>
+                <!-- Hojas del extremo derecho -->
+                <g transform="translate(910 288) scale(-1 1) rotate(-13)" fill="none" stroke-linecap="round">
+                    <path d="M0 0 Q74 -150 203 -248" stroke="#287d6c" stroke-width="8"/>
+                    <g fill="#78b99a" stroke="none">
+                        <path d="M31 -81 Q-27 -172 8 -231 Q41 -177 49 -105Z"/>
+                        <path d="M50 -121 Q38 -218 98 -270 Q86 -202 67 -139Z"/>
+                        <path d="M77 -158 Q106 -247 194 -271 Q143 -216 91 -172Z"/>
+                        <path d="M92 -169 Q168 -223 247 -206 Q182 -183 109 -163Z"/>
+                        <path d="M61 -135 Q-30 -134 -69 -192 Q5 -182 74 -149Z"/>
+                        <path d="M44 -98 Q-39 -83 -89 -130 Q-10 -143 57 -121Z"/>
+                        <path d="M99 -173 Q179 -150 219 -91 Q157 -123 91 -158Z"/>
+                    </g>
+                </g>
+                <!-- Conchas y estrellas discretas -->
+                <g fill="none" stroke="#d9a472" stroke-width="3" stroke-linecap="round" opacity=".75">
+                    <path d="M235 241 Q242 219 260 234 Q276 211 291 234 Q307 219 317 243 Q277 271 235 241Z"/>
+                    <path d="M276 253 L276 226 M276 253 L254 235 M276 253 L297 235"/>
+                    <path d="M664 239 L671 253 L687 254 L675 265 L679 281 L664 272 L649 281 L653 265 L641 254 L657 253 Z"/>
+                </g>
+            </svg>
+            <div class="tropical-copy">
+                <h2>🌊 Un pedacito de Acapulco en Cuernavaca</h2>
+                <p>El sabor del mar, un ambiente fresco y momentos para disfrutar.</p>
+            </div>
+            <svg class="tropical-wave" viewBox="0 0 900 40" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0 19 C140 -2 265 41 430 18 S730 -2 900 19 V40 H0Z" fill="#a8ded8"/>
+                <path d="M0 30 C160 11 296 48 460 29 S760 10 900 30 V40 H0Z" fill="#7acac9" opacity=".58"/>
+            </svg>
+        </section>
+
         <!-- Menú a la Carta SIN PRECIOS -->
         <section>
             <h2 class="section-title">Menú a la Carta</h2>
