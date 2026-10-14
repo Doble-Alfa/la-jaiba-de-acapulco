@@ -9,14 +9,16 @@
             --primary-color: #0077b6;
             --accent-color: #00b4d8;
             --dark-color: #03045e;
-            --light-bg: #f8f9fa;
+            --sand-color: #fefae0;
             --promo-color: #e63946;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
+            /* Fondo estilo playero con degradado de mar y arena */
+            background: linear-gradient(180deg, #caf0f8 0%, #edf6f9 50%, #fefae0 100%);
+            background-attachment: fixed;
             color: #333;
             text-align: center;
         }
@@ -24,16 +26,29 @@
             background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
             color: white;
             padding: 2.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        /* Estilo del Logo */
+        .logo-img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
         }
         header h1 {
             margin: 0;
             font-size: 2.2rem;
             letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         header p {
             margin: 0.5rem 0 0;
             font-size: 1.1rem;
-            opacity: 0.9;
+            opacity: 0.95;
         }
         .container {
             max-width: 900px;
@@ -44,7 +59,7 @@
             color: var(--dark-color);
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
             display: inline-block;
             padding-bottom: 0.3rem;
         }
@@ -58,8 +73,11 @@
             font-size: 1.1rem;
             margin: 0.5rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: background 0.3s;
+            transition: transform 0.2s, background 0.3s;
             color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
         }
         .whatsapp-btn {
             background-color: #25d366;
@@ -73,21 +91,90 @@
         .map-btn:hover {
             background-color: #3367d6;
         }
-        /* Galería de fotos */
+        /* Galería de fotos con indicador táctil */
+        .gallery-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+        }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            margin: 2rem 0;
+            margin: 1.5rem 0 2.5rem;
         }
         .gallery img {
             width: 100%;
             height: 180px;
             object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        /* Sección de Combos / Promociones */
+        .gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+        /* Modal / Visualizador de fotos en pantalla completa */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(255,255,255,0.2);
+            animation: zoom 0.3s ease-in-out;
+        }
+        @keyframes zoom {
+            from {transform: scale(0.7);}
+            to {transform: scale(1);}
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Platillo Especial */
+        .special-box {
+            background: linear-gradient(135deg, #ffb703, #fb8500);
+            color: #023047;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 15px rgba(251, 133, 0, 0.3);
+            text-align: center;
+        }
+        .special-box h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.6rem;
+        }
+        .special-box p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Sección de Combos y Promociones */
         .combos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -95,13 +182,12 @@
             margin-bottom: 2.5rem;
         }
         .combo-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border-top: 5px solid var(--promo-color);
             text-align: left;
-            position: relative;
         }
         .combo-card h3 {
             margin-top: 0;
@@ -113,16 +199,10 @@
             margin-bottom: 1rem;
             line-height: 1.6;
         }
-        .combo-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--promo-color);
-            text-align: right;
-            margin-top: auto;
-        }
-        /* Menú a la carta */
+
+        /* Menú a la carta (Sin precios) */
         .menu-list {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -130,23 +210,19 @@
             margin-top: 1rem;
         }
         .menu-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
+            padding: 0.8rem 0;
             border-bottom: 1px dashed #ddd;
-            padding-bottom: 0.5rem;
-        }
-        .menu-item span:first-child {
             font-weight: bold;
             color: var(--dark-color);
+            font-size: 1.05rem;
         }
-        .menu-item span:last-child {
-            color: var(--promo-color);
-            font-weight: bold;
+        .menu-item:last-child {
+            border-bottom: none;
         }
+
         /* Información de contacto y horarios */
         .info-box {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 1.5rem;
             border-radius: 10px;
             margin: 2rem 0;
@@ -169,8 +245,9 @@
 <body>
 
     <header>
+        <img src="logo.png" alt="Logo Marisquería La Jaiba de Acapulco" class="logo-img">
         <h1>Marisquería La Jaiba de Acapulco</h1>
-        <p>El auténtico sabor del mar hasta tu mesa en Cuernavaca</p>
+        <p>🌊 El auténtico sabor del mar hasta tu mesa en Cuernavaca 🌴</p>
     </header>
 
     <div class="container">
@@ -186,14 +263,30 @@
             </a>
         </section>
 
-        <!-- Galería de Fotos -->
+        <!-- Galería de Fotos interactiva -->
         <section>
             <h2 class="section-title">Nuestros Platillos</h2>
+            <p class="gallery-subtitle">💡 Toca cualquier imagen para verla en pantalla completa</p>
             <div class="gallery">
-                <img src="platillo1.jpeg" alt="Platillo de mariscos 1">
-                <img src="platillo2.jpeg" alt="Platillo de mariscos 2">
-                <img src="platillo3.jpeg" alt="Platillo de mariscos 3">
-                <img src="platillo4.jpeg" alt="Platillo de mariscos 4">
+                <img src="platillo1.jpeg" alt="Platillo de mariscos 1" onclick="openModal(this.src)">
+                <img src="platillo2.jpeg" alt="Platillo de mariscos 2" onclick="openModal(this.src)">
+                <img src="platillo3.jpeg" alt="Platillo de mariscos 3" onclick="openModal(this.src)">
+                <img src="platillo4.jpeg" alt="Platillo de mariscos 4" onclick="openModal(this.src)">
+            </div>
+        </section>
+
+        <!-- Modal para ampliar la foto -->
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="imgExpanded">
+        </div>
+
+        <!-- Platillo Especial de la Casa -->
+        <section>
+            <div class="special-box">
+                <h3>⭐ ESPECIAL DE LA CASA ⭐</h3>
+                <p><strong>Caldo Especial de la Casa</strong></p>
+                <p>Una receta única cargada con el mejor sabor del mar.</p>
             </div>
         </section>
 
@@ -211,7 +304,6 @@
                         <li>Caldo de Pez</li>
                         <li>Ceviche con Camarón</li>
                     </ul>
-                    <div class="combo-price">$800</div>
                 </div>
 
                 <div class="combo-card">
@@ -221,7 +313,6 @@
                         <li>3 Pescadillas de Cazón</li>
                         <li>Consomé de camarón</li>
                     </ul>
-                    <div class="combo-price">$295</div>
                 </div>
 
                 <div class="combo-card">
@@ -231,36 +322,20 @@
                         <li>2 Pescadillas de Cazón</li>
                         <li>Corona o Victoria de 1/2</li>
                     </ul>
-                    <div class="combo-price">$240</div>
                 </div>
 
             </div>
         </section>
 
-        <!-- Menú a la Carta -->
+        <!-- Menú a la Carta SIN PRECIOS -->
         <section>
             <h2 class="section-title">Menú a la Carta</h2>
             <div class="menu-list">
-                <div class="menu-item">
-                    <span>Coctel de Camarón (Chico / Grande)</span>
-                    <span>$120 / $160</span>
-                </div>
-                <div class="menu-item">
-                    <span>Mojarra Frita al Gusto</span>
-                    <span>$150</span>
-                </div>
-                <div class="menu-item">
-                    <span>Filete de Pescado (Empanizado / A la Plancha)</span>
-                    <span>$130</span>
-                </div>
-                <div class="menu-item">
-                    <span>Camarones a la Diabla / Al Mojo de Ajo</span>
-                    <span>$170</span>
-                </div>
-                <div class="menu-item">
-                    <span>Caldo de Camarón o Siete Mares</span>
-                    <span>$160</span>
-                </div>
+                <div class="menu-item">Coctel de Camarón (Chico / Grande)</div>
+                <div class="menu-item">Mojarra Frita al Gusto</div>
+                <div class="menu-item">Filete de Pescado (Empanizado / A la Plancha)</div>
+                <div class="menu-item">Camarones a la Diabla / Al Mojo de Ajo</div>
+                <div class="menu-item">Caldo de Camarón o Siete Mares</div>
             </div>
         </section>
 
@@ -286,6 +361,18 @@
     <footer>
         <p>&copy; 2026 Marisquería La Jaiba de Acapulco. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Script para ampliar imágenes -->
+    <script>
+        function openModal(src) {
+            document.getElementById("imgExpanded").src = src;
+            document.getElementById("imageModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>
