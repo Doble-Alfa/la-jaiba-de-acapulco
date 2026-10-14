@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marisquería La Jaiba de Acapulco</title>
-    <style>
+<style>
         :root {
             --primary-color: #0077b6;
             --accent-color: #00b4d8;
@@ -16,7 +16,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            /* Fondo estilo playero con degradado de mar y arena */
             background: linear-gradient(180deg, #caf0f8 0%, #edf6f9 50%, #fefae0 100%);
             background-attachment: fixed;
             color: #333;
@@ -28,7 +27,6 @@
             padding: 2.5rem 1rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        /* Estilo del Logo */
         .logo-img {
             width: 140px;
             height: 140px;
@@ -41,13 +39,13 @@
         }
         header h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2rem;
             letter-spacing: 1px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         header p {
             margin: 0.5rem 0 0;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             opacity: 0.95;
         }
         .container {
@@ -91,7 +89,7 @@
         .map-btn:hover {
             background-color: #3367d6;
         }
-        /* Galería de fotos con indicador táctil */
+        /* Galería con imágenes completas sin recortar */
         .gallery-subtitle {
             font-size: 0.9rem;
             color: #666;
@@ -100,24 +98,25 @@
         }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             margin: 1.5rem 0 2.5rem;
         }
         .gallery img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
+            height: 220px;
+            object-fit: contain; /* Muestra la imagen completa sin recortar nada */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .gallery img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
         }
-        /* Modal / Visualizador de fotos en pantalla completa */
+        /* Modal / Visualizador de fotos */
         .modal {
             display: none;
             position: fixed;
@@ -154,7 +153,7 @@
             cursor: pointer;
         }
 
-        /* Platillo Especial */
+        /* Platillo Especial sin salto de línea en estrellas */
         .special-box {
             background: linear-gradient(135deg, #ffb703, #fb8500);
             color: #023047;
@@ -166,12 +165,19 @@
         }
         .special-box h3 {
             margin: 0 0 0.5rem;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
+            white-space: nowrap; /* Evita que la estrella se baje de renglón en móviles */
         }
         .special-box p {
             margin: 0.5rem 0;
             font-size: 1.1rem;
             font-weight: 500;
+        }
+        .special-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d00000;
+            margin-top: 0.5rem;
         }
 
         /* Sección de Combos y Promociones */
@@ -188,6 +194,9 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border-top: 5px solid var(--promo-color);
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .combo-card h3 {
             margin-top: 0;
@@ -198,6 +207,13 @@
             padding-left: 1.2rem;
             margin-bottom: 1rem;
             line-height: 1.6;
+        }
+        .combo-price {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--promo-color);
+            text-align: right;
+            margin-top: auto;
         }
 
         /* Menú a la carta (Sin precios) */
@@ -281,12 +297,13 @@
             <img class="modal-content" id="imgExpanded">
         </div>
 
-        <!-- Platillo Especial de la Casa -->
+ <!-- Platillo Especial de la Casa -->
         <section>
             <div class="special-box">
                 <h3>⭐ ESPECIAL DE LA CASA ⭐</h3>
                 <p><strong>Caldo Especial de la Casa</strong></p>
                 <p>Una receta única cargada con el mejor sabor del mar.</p>
+                <div class="special-price">$270</div>
             </div>
         </section>
 
@@ -296,37 +313,46 @@
             <div class="combos-grid">
                 
                 <div class="combo-card">
-                    <h3>🍺 CUBETAZO</h3>
-                    <ul>
-                        <li>6 Cervezas</li>
-                        <li>Mojarra</li>
-                        <li>Pescadillas</li>
-                        <li>Caldo de Pez</li>
-                        <li>Ceviche con Camarón</li>
-                    </ul>
+                    <div>
+                        <h3>🍺 CUBETAZO</h3>
+                        <ul>
+                            <li>6 Cervezas</li>
+                            <li>Mojarra</li>
+                            <li>Pescadillas</li>
+                            <li>Caldo de Pez</li>
+                            <li>Ceviche con Camarón</li>
+                        </ul>
+                    </div>
+                    <div class="combo-price">$800</div>
                 </div>
 
                 <div class="combo-card">
-                    <h3>🍽️ COMBO 1</h3>
-                    <ul>
-                        <li>Filete empanizado</li>
-                        <li>3 Pescadillas de Cazón</li>
-                        <li>Consomé de camarón</li>
-                    </ul>
+                    <div>
+                        <h3>🍽️ COMBO 1</h3>
+                        <ul>
+                            <li>Filete empanizado</li>
+                            <li>3 Pescadillas de Cazón</li>
+                            <li>Consomé de camarón</li>
+                        </ul>
+                    </div>
+                    <div class="combo-price">$295</div>
                 </div>
 
                 <div class="combo-card">
-                    <h3>🍻 PA' LA CRUDA</h3>
-                    <ul>
-                        <li>Caldo de camarón</li>
-                        <li>2 Pescadillas de Cazón</li>
-                        <li>Corona o Victoria de 1/2</li>
-                    </ul>
+                    <div>
+                        <h3>🍻 PA' LA CRUDA</h3>
+                        <ul>
+                            <li>Caldo de camarón</li>
+                            <li>2 Pescadillas de Cazón</li>
+                            <li>Corona o Victoria de 1/2</li>
+                        </ul>
+                    </div>
+                    <div class="combo-price">$240</div>
                 </div>
 
             </div>
         </section>
-
+        
         <!-- Menú a la Carta SIN PRECIOS -->
         <section>
             <h2 class="section-title">Menú a la Carta</h2>
